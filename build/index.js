@@ -36,6 +36,7 @@ var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
 var parser = serial_1.openSerial(serialport);
 serial_1.readSerialListener(parser);
 serial_1.closeSerial(serialport);
+dbReadHandlers_1.default(serialport);
 // MIDDLEWARE
 app.use(cors_1.default());
 app.use(utils_1.logger());
@@ -43,7 +44,5 @@ app.use(utils_1.responseDelay(env_1.RESPONSE_DELAY));
 // ENDPOINTS
 app.post('/user', express_1.json(), addUser_1.default); //(endpointUrl,handlers)
 app.get('/user', getUser_1.default);
+//MAIN
 app.listen({ port: env_1.PORT }, function () { return console.log("Server running on port " + env_1.PORT); });
-// testRead()
-// testWrite()
-dbReadHandlers_1.default(serialport);
