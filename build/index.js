@@ -28,23 +28,9 @@ var env_1 = require("./env");
 var utils_1 = require("./utils");
 var addUser_1 = __importDefault(require("./routes/addUser"));
 var getUser_1 = __importDefault(require("./routes/getUser"));
-var SerialPort = require('serialport');
-var Readline = SerialPort.parsers.Readline;
-function getSerialPort(path, speed) {
-    return new SerialPort(path, {
-        baudRate: speed
-    });
-}
-var serialport = getSerialPort('/dev/tty.usbmodem02691', 9600);
-function openSerial(serialport) {
-    var parser = new Readline();
-    serialport.pipe(parser);
-    serialport.on('open', function () {
-        console.log('Port is open!');
-    });
-    return parser;
-}
-var parser = openSerial(serialport);
+var serial_1 = require("./serialHandlers/serial");
+var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
+var parser = serial_1.openSerial(serialport);
 var app = express_1.default();
 // MIDDLEWARE
 app.use(cors_1.default());

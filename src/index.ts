@@ -6,26 +6,11 @@ import addUser from './routes/addUser'
 import getUser from './routes/getUser'
 import testRead from './dbHandlers/dbReadHandlers'
 import testWrite from './dbHandlers/dbWriteHandlers'
+import {getSerialPort, openSerial,} from "./serialHandlers/serial";
 
-const SerialPort = require('serialport')
-const Readline = SerialPort.parsers.Readline
-
-function getSerialPort(path:any,speed:any) {
-    return new SerialPort(path, {
-        baudRate: speed
-    });
-}
 
 const serialport = getSerialPort('/dev/tty.usbmodem02691',9600)
 
-function openSerial(serialport:any) {
-    const parser = new Readline()
-    serialport.pipe(parser)
-    serialport.on('open', () => {
-        console.log('Port is open!')
-    })
-    return parser;
-}
 
 const parser = openSerial(serialport);
 
