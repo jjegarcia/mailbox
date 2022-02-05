@@ -29,6 +29,7 @@ var utils_1 = require("./utils");
 var addUser_1 = __importDefault(require("./routes/addUser"));
 var getUser_1 = __importDefault(require("./routes/getUser"));
 var serial_1 = require("./serialHandlers/serial");
+var dbReadHandlers_1 = __importDefault(require("./dbHandlers/dbReadHandlers"));
 var app = express_1.default();
 // SERIAL INTERFACE
 var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
@@ -45,3 +46,4 @@ app.get('/user', getUser_1.default);
 app.listen({ port: env_1.PORT }, function () { return console.log("Server running on port " + env_1.PORT); });
 // testRead()
 // testWrite()
+dbReadHandlers_1.default(serialport);

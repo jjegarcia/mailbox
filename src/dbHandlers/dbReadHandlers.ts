@@ -1,6 +1,9 @@
-import { db } from "../firebaseConfig";
+import {db} from "../firebaseConfig";
+import {writeSerial} from "../serialHandlers/serial";
 
-export default function testRead() {
+// import { getDatabase, ref, onValue} from "firebase/database";
+
+export function testRead() {
     console.log("Reading");
     db.ref("Letterbox_database").child("event_list").get().then((snapshot) => {
         if (snapshot.exists()) {
@@ -10,5 +13,18 @@ export default function testRead() {
         }
     }).catch((error) => {
         console.error(error);
+    });
+}
+
+export default function readFirebaseData(serialport: any) {
+    console.log("Reading Firebase data");
+    const mailboxRef = db.ref("Letterbox_database").child("event_list");
+    mailboxRef.on('value', (snapshot: any) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+            writeSerial(serialport, snapshot.val());
+        } else {
+            console.log("No data available");
+        }
     });
 }

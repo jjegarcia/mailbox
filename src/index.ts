@@ -7,12 +7,13 @@ import getUser from './routes/getUser'
 import testRead from './dbHandlers/dbReadHandlers'
 import testWrite from './dbHandlers/dbWriteHandlers'
 import {closeSerial, getSerialPort, openSerial, readSerialListener,} from "./serialHandlers/serial";
+import readFirebaseData from "./dbHandlers/dbReadHandlers";
 
 
 const app = express()
 
 // SERIAL INTERFACE
-const serialport = getSerialPort('/dev/tty.usbmodem02691',9600)
+const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
 const parser = openSerial(serialport);
 readSerialListener(parser);
 
@@ -34,5 +35,7 @@ app.listen({port: PORT}, () => console.log(`Server running on port ${PORT}`))
 
 // testRead()
 // testWrite()
+
+readFirebaseData(serialport)
 
 
