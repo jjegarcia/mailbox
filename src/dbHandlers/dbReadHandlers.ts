@@ -22,7 +22,7 @@ export default function readFirebaseData(serialport: any) {
     mailboxRef.on('value', (snapshot: any) => {
         if (snapshot.exists()) {
             console.log(snapshot.val());
-            writeSerial(serialport, snapshot.val());
+            writeSerial(serialport, snapshot.val()+'\n');
         } else {
             console.log("No data available");
         }

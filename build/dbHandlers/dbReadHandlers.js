@@ -24,7 +24,7 @@ function readFirebaseData(serialport) {
     mailboxRef.on('value', function (snapshot) {
         if (snapshot.exists()) {
             console.log(snapshot.val());
-            serial_1.writeSerial(serialport, snapshot.val());
+            serial_1.writeSerial(serialport, snapshot.val() + '\n');
         }
         else {
             console.log("No data available");
