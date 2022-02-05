@@ -29,9 +29,12 @@ var utils_1 = require("./utils");
 var addUser_1 = __importDefault(require("./routes/addUser"));
 var getUser_1 = __importDefault(require("./routes/getUser"));
 var serial_1 = require("./serialHandlers/serial");
+var app = express_1.default();
+// SERIAL INTERFACE
 var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
 var parser = serial_1.openSerial(serialport);
-var app = express_1.default();
+serial_1.readSerialListener(parser);
+serial_1.closeSerial(serialport);
 // MIDDLEWARE
 app.use(cors_1.default());
 app.use(utils_1.logger());
@@ -42,11 +45,3 @@ app.get('/user', getUser_1.default);
 app.listen({ port: env_1.PORT }, function () { return console.log("Server running on port " + env_1.PORT); });
 // testRead()
 // testWrite()
-parser.on('data', function (data) {
-    console.log('==>' + data);
-    // io.sockets.emit('new message', data)
-});
-serialport.on('close', function () {
-    console.log('Serial port disconnected.');
-    // io.sockets.emit('close')
-});
