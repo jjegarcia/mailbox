@@ -28,17 +28,15 @@ var env_1 = require("./env");
 var utils_1 = require("./utils");
 var addUser_1 = __importDefault(require("./routes/addUser"));
 var getUser_1 = __importDefault(require("./routes/getUser"));
-var SerialPort = require('serialport');
-var Readline = SerialPort.parsers.Readline;
-var serialport = new SerialPort('/dev/tty.usbmodem02691', {
-    baudRate: 9600
-});
-var parser = new Readline();
-serialport.pipe(parser);
-serialport.on('open', function () {
-    console.log('Port is open!');
-});
+var serial_1 = require("./serialHandlers/serial");
+var dbReadHandlers_1 = __importDefault(require("./dbHandlers/dbReadHandlers"));
 var app = express_1.default();
+// SERIAL INTERFACE
+var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
+var parser = serial_1.openSerial(serialport);
+serial_1.readSerialListener(parser);
+serial_1.closeSerial(serialport);
+dbReadHandlers_1.default(serialport);
 // MIDDLEWARE
 app.use(cors_1.default());
 app.use(utils_1.logger());
@@ -46,15 +44,5 @@ app.use(utils_1.responseDelay(env_1.RESPONSE_DELAY));
 // ENDPOINTS
 app.post('/user', express_1.json(), addUser_1.default); //(endpointUrl,handlers)
 app.get('/user', getUser_1.default);
+//MAIN
 app.listen({ port: env_1.PORT }, function () { return console.log("Server running on port " + env_1.PORT); });
-// testRead()
-// testWrite()
-parser.on('data', function (data) {
-    console.log('==>' + data);
-    // io.sockets.emit('new message', data)
-});
-serialport.on('close', function () {
-    console.log('Serial port disconnected.');
-    // io.sockets.emit('close')
-});
-console.log("here");
