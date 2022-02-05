@@ -30,14 +30,21 @@ var addUser_1 = __importDefault(require("./routes/addUser"));
 var getUser_1 = __importDefault(require("./routes/getUser"));
 var SerialPort = require('serialport');
 var Readline = SerialPort.parsers.Readline;
-var serialport = new SerialPort('/dev/tty.usbmodem02691', {
-    baudRate: 9600
-});
-var parser = new Readline();
-serialport.pipe(parser);
-serialport.on('open', function () {
-    console.log('Port is open!');
-});
+function getSerialPort(path, speed) {
+    return new SerialPort(path, {
+        baudRate: speed
+    });
+}
+var serialport = getSerialPort('/dev/tty.usbmodem02691', 9600);
+function openSerial(serialport) {
+    var parser = new Readline();
+    serialport.pipe(parser);
+    serialport.on('open', function () {
+        console.log('Port is open!');
+    });
+    return parser;
+}
+var parser = openSerial(serialport);
 var app = express_1.default();
 // MIDDLEWARE
 app.use(cors_1.default());
@@ -57,4 +64,3 @@ serialport.on('close', function () {
     console.log('Serial port disconnected.');
     // io.sockets.emit('close')
 });
-console.log("here");

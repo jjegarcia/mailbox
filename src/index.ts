@@ -9,14 +9,26 @@ import testWrite from './dbHandlers/dbWriteHandlers'
 
 const SerialPort = require('serialport')
 const Readline = SerialPort.parsers.Readline
-const serialport = new SerialPort('/dev/tty.usbmodem02691', {
-    baudRate: 9600
-})
-const parser = new Readline()
-serialport.pipe(parser)
-serialport.on('open', () => {
-    console.log('Port is open!')
-})
+
+function getSerialPort(path:any,speed:any) {
+    return new SerialPort(path, {
+        baudRate: speed
+    });
+}
+
+const serialport = getSerialPort('/dev/tty.usbmodem02691',9600)
+
+function openSerial(serialport:any) {
+    const parser = new Readline()
+    serialport.pipe(parser)
+    serialport.on('open', () => {
+        console.log('Port is open!')
+    })
+    return parser;
+}
+
+const parser = openSerial(serialport);
+
 
 
 const app = express()
@@ -45,4 +57,4 @@ serialport.on('close', () => {
     // io.sockets.emit('close')
 })
 
-console.log("here")
+
