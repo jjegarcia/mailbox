@@ -28,7 +28,7 @@ export function readSerialListener(parser: any) {
 
 export function writeSerial(serialport: any, data: any) {
     console.log('s:==>' + data)
-    serialport.write(data + '/n')
+    serialport.write(data + '\n')
 }
 
 export function closeSerial(serialport: any) {
