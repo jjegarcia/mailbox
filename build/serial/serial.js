@@ -10,7 +10,7 @@ function runSerial() {
         console.log('Port is open!');
     });
     console.log("here");
-    port.write("A/n");
+    port.write("A\n");
     port.pipe(parser);
     parser.on('data', handleRead);
     function handleRead(data) {
