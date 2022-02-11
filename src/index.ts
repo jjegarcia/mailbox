@@ -10,7 +10,8 @@ import readFirebaseData from "./dbHandlers/dbReadHandlers";
 const app = express()
 
 // SERIAL INTERFACE
-const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
+// const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
+const serialport = getSerialPort('/dev/ttyS0', 9600)
 const parser = openSerial(serialport);
 readSerialListener(parser);
 closeSerial(serialport);
