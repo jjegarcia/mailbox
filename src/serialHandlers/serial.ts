@@ -37,3 +37,7 @@ export function closeSerial(serialport: any) {
     })
 }
 
+export function setupBlue(serialport: any) {
+    serialport.write(serialport,'$$$+\nSS,C0\n,C,0,049162978378')
+}
+

@@ -4,7 +4,7 @@ import {PORT, RESPONSE_DELAY} from './env'
 import {responseDelay, logger} from './utils'
 import addUser from './routes/addUser'
 import getUser from './routes/getUser'
-import {closeSerial, getSerialPort, openSerial, readSerialListener,} from "./serialHandlers/serial";
+import {closeSerial, getSerialPort, openSerial, readSerialListener,setupBlue,} from "./serialHandlers/serial";
 import readFirebaseData from "./dbHandlers/dbReadHandlers";
 
 const app = express()
