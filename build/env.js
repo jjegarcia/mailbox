@@ -9,5 +9,5 @@ dotenv_1.default.config();
 function getNumber(env, def) {
     return env !== undefined ? Number(env) : def;
 }
-exports.PORT = getNumber(process.env.PORT, 5001);
+exports.PORT = getNumber(process.env.PORT, 5002);
 exports.RESPONSE_DELAY = getNumber(process.env.RESPONSE_DELAY, 0);

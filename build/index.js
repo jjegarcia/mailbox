@@ -31,12 +31,15 @@ var getUser_1 = __importDefault(require("./routes/getUser"));
 var serial_1 = require("./serialHandlers/serial");
 var dbReadHandlers_1 = __importDefault(require("./dbHandlers/dbReadHandlers"));
 var app = express_1.default();
+var initDb = false;
+var initSerial = false;
 // SERIAL INTERFACE
 var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
+// const serialport = getSerialPort('/dev/ttyS0', 9600)
 var parser = serial_1.openSerial(serialport);
 serial_1.readSerialListener(parser);
 serial_1.closeSerial(serialport);
-dbReadHandlers_1.default(serialport);
+dbReadHandlers_1.default(serialport, initDb);
 // MIDDLEWARE
 app.use(cors_1.default());
 app.use(utils_1.logger());
