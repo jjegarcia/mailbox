@@ -4,19 +4,19 @@ import {PORT, RESPONSE_DELAY} from './env'
 import {responseDelay, logger} from './utils'
 import addUser from './routes/addUser'
 import getUser from './routes/getUser'
-import {closeSerial, getSerialPort, openSerial, readSerialListener,setupBlue,} from "./serialHandlers/serial";
+import {closeSerial, getSerialPort, openSerial, readSerialListener,} from "./serialHandlers/serial";
 import readFirebaseData from "./dbHandlers/dbReadHandlers";
 
 const app = express()
-
+const init= false
 // SERIAL INTERFACE
-// const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
-const serialport = getSerialPort('/dev/ttyS0', 9600)
+const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
+// const serialport = getSerialPort('/dev/ttyS0', 9600)
 const parser = openSerial(serialport)
 readSerialListener(parser)
-setupBlue(serialport)
+// setupBlue(serialport)
 closeSerial(serialport)
-readFirebaseData(serialport)
+readFirebaseData(serialport,init)
 
 // MIDDLEWARE
 app.use(cors())
