@@ -34,8 +34,8 @@ var app = express_1.default();
 var initDb = false;
 var initSerial = false;
 // SERIAL INTERFACE
-var serialport = serial_1.getSerialPort('/dev/tty.usbmodem02691', 9600);
-// const serialport = getSerialPort('/dev/ttyS0', 9600)
+// const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
+var serialport = serial_1.getSerialPort('/dev/ttyS0', 9600);
 var parser = serial_1.openSerial(serialport);
 serial_1.readSerialListener(parser);
 serial_1.closeSerial(serialport);

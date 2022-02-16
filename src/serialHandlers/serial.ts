@@ -28,6 +28,11 @@ export function readSerialListener(parser: any) {
 
 export function writeSerial(serialport: any, data: any) {
     console.log('s:==>' + data)
+    serialport.write(data)
+}
+
+export function writeSerialRet(serialport: any, data: any){
+     console.log('sr:==>' + data)
     serialport.write(data + '\n')
 }
 
