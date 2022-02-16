@@ -8,15 +8,15 @@ import {closeSerial, getSerialPort, openSerial, readSerialListener,} from "./ser
 import readFirebaseData from "./dbHandlers/dbReadHandlers";
 
 const app = express()
-const init= false
+const initDb= false
+
 // SERIAL INTERFACE
-const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
-// const serialport = getSerialPort('/dev/ttyS0', 9600)
+// const serialport = getSerialPort('/dev/tty.usbmodem02691', 9600)
+const serialport = getSerialPort('/dev/ttyS0', 9600)
 const parser = openSerial(serialport)
 readSerialListener(parser)
-// setupBlue(serialport)
 closeSerial(serialport)
-readFirebaseData(serialport,init)
+readFirebaseData(serialport,initDb)
 
 // MIDDLEWARE
 app.use(cors())
