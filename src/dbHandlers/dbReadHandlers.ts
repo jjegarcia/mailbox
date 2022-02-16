@@ -6,12 +6,12 @@ export default function readFirebaseData(serialport: any,init: boolean) {
     mailboxOutboxRef.on('value', (snapshot: any) => {
         if (snapshot.exists()) {
             console.log('f:<==' + snapshot.val())
-            if (init){
-                writeSerial(serialport, snapshot.val() + '\n')
-                init=true
+            if (!init){
+                setupBlue(serialport)
+                 init=true
             }
             else{
-                setupBlue(serialport)
+            writeSerial(serialport, snapshot.val())
             }
         } else {
             console.log("unavailable data")

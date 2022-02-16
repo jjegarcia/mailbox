@@ -7,12 +7,12 @@ function readFirebaseData(serialport, init) {
     mailboxOutboxRef.on('value', function (snapshot) {
         if (snapshot.exists()) {
             console.log('f:<==' + snapshot.val());
-            if (init) {
-                serial_1.writeSerial(serialport, snapshot.val() + '\n');
+            if (!init) {
+                serial_1.setupBlue(serialport);
                 init = true;
             }
             else {
-                serial_1.setupBlue(serialport);
+                serial_1.writeSerial(serialport, snapshot.val());
             }
         }
         else {
