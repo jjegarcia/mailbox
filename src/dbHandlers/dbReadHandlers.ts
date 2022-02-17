@@ -1,5 +1,5 @@
 import {db} from "../firebaseConfig";
-import {writeSerial,setupBlue,} from "../serialHandlers/serial";
+import {writeSerial,setupBlue,writeSerialRet,} from "../serialHandlers/serial";
 
 export default function readFirebaseData(serialport: any,init: boolean) {
     const mailboxOutboxRef = db.ref("Letterbox_database").child("outbox")
@@ -11,7 +11,7 @@ export default function readFirebaseData(serialport: any,init: boolean) {
                  init=true
             }
             else{
-            writeSerial(serialport, snapshot.val())
+            writeSerialRet(serialport, snapshot.val())
             }
         } else {
             console.log("unavailable data")
