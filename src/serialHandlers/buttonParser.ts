@@ -1,9 +1,10 @@
 import {getPayloadSize,get2Number,get4Number,} from './gnrlParser'
 import {writeDb} from '../dbHandlers/dbWriteHandlers'
-const ACCEL_SIZE = 2
+const BUTTON_SIZE = 2
+
 export function parseButton(data: any){
  var size= getPayloadSize(data,'P')
- if (size==ACCEL_SIZE){
+ if (size==BUTTON_SIZE){
     writeDb('P', getP(data,size))
      }
 }

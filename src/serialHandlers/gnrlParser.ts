@@ -15,3 +15,7 @@ return a24h(getPayload(data,header).substring(2+start,2+end))
 export function get2Number(data: string,start: any,end: any,header: string){
 return a22h(getPayload(data,header).substring(2+start,2+end))
 }
+
+export function get1Number(data: string,start: any,end: any,header: string){
+return a2h(getPayload(data,header).substring(2+start,2+end))
+}

@@ -5,7 +5,7 @@ export default function writeFirebaseData(data: any) {
     data.replace('\n',"")
     mailboxInboxRef.set(data, (error) => error ? console.log(error) : console.log('f:==>' + data))
 }
-export function writeDb(path: string, data: string){
+export function writeDb(path: string, data: any){
     mailboxRef.child(path).set(data, (error) => error ? console.log(error) : console.log('f:==>' + data))
 }
 
