@@ -1,15 +1,16 @@
 import express, {urlencoded, json, Router} from 'express'
 import cors from 'cors'
 import {PORT, RESPONSE_DELAY} from './env'
-import {responseDelay, logger} from './utils'
 import addUser from './routes/addUser'
 import getUser from './routes/getUser'
 import {closeSerial, getSerialPort, openSerial, readSerialListener,} from "./serialHandlers/serial"
 import readFirebaseData from "./dbHandlers/dbReadHandlers"
-import {a2h,} from "./hex/hex"
+// import {a2h,a22h,a24h} from "./hex/hex"
+// console.log(a24h('A1B0'))
+import {parseAccel,} from "./serialHandlers/accelParser"
+console.log(parseAccel('[FX0C4201DE0C1802]'))
 
 
-a2h('A')
 // const app = express()
 // const initDb= false
 // const initSerial= false

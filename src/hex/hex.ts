@@ -1,22 +1,30 @@
-let table = new Map([
-['0',0],
-['1',1],
-['2',2],
-['3',3],
-['4',4],
-['5',5],
-['6',6],
-['7',7],
-['8',8],
-['9',9],
-['A',10],
-['B',11],
-['C',12],
-['D',13],
-['E',14],
-['F',15]
-])
+let table = new Map()
 
-export function a2h(value: any){
-    console.log(table.get(value))
+table.set('0',0)
+table.set('1',1)
+table.set('2',2)
+table.set('3',3)
+table.set('4',4)
+table.set('5',5)
+table.set('6',6)
+table.set('7',7)
+table.set('8',8)
+table.set('9',9)
+table.set('A',10)
+table.set('B',11)
+table.set('C',12)
+table.set('D',13)
+table.set('E',14)
+table.set('F',15)
+
+
+export function a2h(value: string){
+    return table.get(value)
+}
+
+export function a22h(value: string){
+    return a2h(value.charAt(0))*16+a2h(value.charAt(1))
+}
+export function a24h(value: string){
+return a2h(value.charAt(0))*4096+a2h(value.charAt(1))*256+a2h(value.charAt(2))*16+a2h(value.charAt(3))
 }
