@@ -1,14 +1,15 @@
-import {getPayloadSize,get4Number, get2Number,} from './gnrlParser'
+import {getPayload,getPayloadSize,get4Number, get2Number,} from './gnrlParser'
 import {writeDb} from '../dbHandlers/dbWriteHandlers'
 const ACCEL_SIZE = 12
 
 export function parseAccel(data: any){
-//     var size= getPayloadSize(data,'X')
-//     if (size==ACCEL_SIZE){
-//         writeDb('X', getX(data,size))
-//         writeDb('Y', getY(data,size))
-//         writeDb('Z', getZ(data,size))
-//     }
+   var payload= getPayload(data,'X')
+    var size= getPayloadSize(payload)
+ if (size==ACCEL_SIZE && payload.length== size+3){
+        writeDb('X', getX(payload,size))
+        writeDb('Y', getY(payload,size))
+        writeDb('Z', getZ(payload,size))
+    }
 }
 
 function getX(data: any,size: any){
