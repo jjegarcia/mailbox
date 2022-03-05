@@ -5,7 +5,7 @@ const TEMP_SIZE = 4
 export function parseTemperature(data: any){
     var payload= getPayload(data,'T')
     var size= getPayloadSize(payload)
-    if (size==TEMP_SIZE ){
+    if (size==TEMP_SIZE && payload.length== size+3){
         writeDb('T', getT(payload,size))
      }
 }
