@@ -9,10 +9,10 @@ import readFirebaseData from "./dbHandlers/dbReadHandlers"
 // console.log(a24h('A1B0'))
 // import {parseAccel,} from "./serialHandlers/accelParser"
 // console.log(parseAccel('[FX0C4201DE0C1802]'))
-// import {parseButton,} from "./serialHandlers/buttonParser"
-// console.log(parseButton('[3P0200]'))
-import {parseLed,} from "./serialHandlers/ledParser"
-console.log(parseLed('[3L0211]'))
+import {parseButton,} from "./serialHandlers/buttonParser"
+console.log(parseButton('[3P0201]'))
+// import {parseLed,} from "./serialHandlers/ledParser"
+// console.log(parseLed('[3L0211]'))
 // import {parseTemperature,} from "./serialHandlers/temperatureParser"
 // console.log(parseTemperature('[0T04C001]'))
 
