@@ -3,22 +3,22 @@ import {writeDb} from '../dbHandlers/dbWriteHandlers'
 const ACCEL_SIZE = 12
 
 export function parseAccel(data: any){
-    var size= getPayloadSize(data,'X')
-    if (size==ACCEL_SIZE){
-        writeDb('X', getX(data,size))
-        writeDb('Y', getY(data,size))
-        writeDb('Z', getZ(data,size))
-    }
+//     var size= getPayloadSize(data,'X')
+//     if (size==ACCEL_SIZE){
+//         writeDb('X', getX(data,size))
+//         writeDb('Y', getY(data,size))
+//         writeDb('Z', getZ(data,size))
+//     }
 }
 
 function getX(data: any,size: any){
-    return get4Number(data,0,size/3,'X')
+    return get4Number(data,0,size/3)
 }
 
 function getY(data: any,size: any){
-    return get4Number(data,size/3,2*size/3,'X')
+    return get4Number(data,size/3,2*size/3)
 }
 
 function getZ(data: any,size: any){
-    return get4Number(data,2*size/3,size,'X')
+    return get4Number(data,2*size/3,size)
 }
